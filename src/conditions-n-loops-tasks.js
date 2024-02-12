@@ -21,9 +21,13 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number < 0) {
+    return false;
+  }
+  return true;
 }
+isPositive(-5);
 
 /**
  * Returns the maximum of three numbers without using Array and Math classes methods.
@@ -38,9 +42,27 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let max = 0;
+  if (a >= b) {
+    if (a >= c) {
+      max = a;
+      return max;
+    }
+    max = c;
+    return max;
+  }
+  if (b >= a) {
+    if (b >= c) {
+      max = b;
+      return max;
+    }
+    max = c;
+    return max;
+  }
+  return max;
 }
+getMaxNumber(1, 2, 3);
 
 /**
  * Checks if a queen can capture a king in the next move on an 8x8 chessboard.
@@ -82,9 +104,22 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === 0 || b === 0 || c === 0) {
+    return false;
+  }
+  if (a === b && a + b > c) {
+    return true;
+  }
+  if (b === c && b + c > a) {
+    return true;
+  }
+  if (c === a && c + a > b) {
+    return true;
+  }
+  return false;
 }
+isIsoscelesTriangle(2, 2, 5);
 
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
@@ -156,6 +191,15 @@ function isPalindrome(/* str */) {
 function getIndexOf(/* str, letter */) {
   throw new Error('Not implemented');
 }
+//   for (let i = 0; i < str.length; i += 1) {
+//     if (str.charAt(i) === letter) {
+//       return i;
+//     }
+//   }
+//   return -1;
+// }
+// getIndexOf('qwerty', 'q');
+/**
 
 /**
  * Checks if a number contains a specific digit.
@@ -174,7 +218,17 @@ function getIndexOf(/* str, letter */) {
  */
 function isContainNumber(/* num, digit */) {
   throw new Error('Not implemented');
+  // let numb = num;
+  // while (numb > 0) {
+  //   const lastDigit = numb % 10;
+  //   if (lastDigit === digit) {
+  //     return true;
+  //   }
+  //   numb = Math.floor(num / 10);
+  // }
+  // return false;
 }
+// isContainNumber(123450, 5);
 
 /**
  * Finds the index of an element in an array where the sum of elements to the left equals the sum of elements to the right.
@@ -233,10 +287,33 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
-}
 
+function rotateMatrix(matrix) {
+  const mtr = matrix;
+  const n = mtr.length;
+
+  for (let i = 0; i < n; i += 1) {
+    for (let j = i; j < n; j += 1) {
+      const buff = mtr[i][j];
+      mtr[i][j] = mtr[j][i];
+      mtr[j][i] = buff;
+    }
+  }
+
+  for (let i = 0; i < n; i += 1) {
+    for (let j = 0; j < Math.floor(n / 2); j += 1) {
+      const buff = mtr[i][j];
+      mtr[i][j] = mtr[i][n - 1 - j];
+      mtr[i][n - 1 - j] = buff;
+    }
+  }
+  return mtr;
+}
+rotateMatrix([
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+]);
 /**
  * Sorts an array of numbers in ascending order in place.
  * Employ any sorting algorithm of your choice.
@@ -251,10 +328,26 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
-}
+function sortByAsc(arr) {
+  const array = arr;
 
+  for (let j = 0; j < array.length; j += 1) {
+    let max = -Infinity;
+    let index = null;
+
+    for (let i = 0; i < array.length - j; i += 1) {
+      if (array[i] > max) {
+        max = array[i];
+        index = i;
+      }
+    }
+    const box = array[array.length - 1 - j];
+    array[array.length - 1 - j] = max;
+    array[index] = box;
+  }
+  return arr;
+}
+sortByAsc([-2, 9, 5, -3]);
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
  * Take into account that the string can be very long and the number of iterations is large. Consider how you can optimize your solution.
