@@ -154,10 +154,59 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+    switch (char) {
+      case '0':
+        result += 'zero';
+        break;
+      case '1':
+        result += 'one';
+        break;
+      case '2':
+        result += 'two';
+        break;
+      case '3':
+        result += 'three';
+        break;
+      case '4':
+        result += 'four';
+        break;
+      case '5':
+        result += 'five';
+        break;
+      case '6':
+        result += 'six';
+        break;
+      case '7':
+        result += 'seven';
+        break;
+      case '8':
+        result += 'eight';
+        break;
+      case '9':
+        result += 'nine';
+        break;
+      case ',':
+      case '.':
+        result += 'point';
+        break;
+      case '-':
+        result += 'minus';
+        break;
+      default:
+        break;
+    }
+    if (i !== numberStr.length - 1) {
+      result += ' ';
+    }
+  }
+  return result;
 }
 
+convertNumberToString('1950.2');
 /**
  * Determines whether a string is a palindrome.
  * In this task, the use of methods of the String and Array classes is not allowed.
@@ -188,17 +237,15 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
 }
-//   for (let i = 0; i < str.length; i += 1) {
-//     if (str.charAt(i) === letter) {
-//       return i;
-//     }
-//   }
-//   return -1;
-// }
-// getIndexOf('qwerty', 'q');
+getIndexOf('qwerty', 'q');
 /**
 
 /**
@@ -365,10 +412,25 @@ sortByAsc([-2, 9, 5, -3]);
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
-}
+function shuffleChar(str, iterations) {
+  let string = str;
+  for (let i = 0; i < iterations; i += 1) {
+    let even = '';
+    let odd = '';
 
+    for (let j = 0; j < string.length; j += 1) {
+      if (j % 2) {
+        odd += string[j];
+      } else {
+        even += string[j];
+      }
+    }
+    string = even.concat(odd);
+  }
+
+  return string;
+}
+shuffleChar('qwerty', 2);
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
