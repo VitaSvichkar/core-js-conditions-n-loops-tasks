@@ -300,8 +300,17 @@ convertNumberToString('1950.2');
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let start = 0;
+  let end = str.length - 1;
+  while (start < end) {
+    if (str[start] !== str[end]) {
+      return false;
+    }
+    start += 1;
+    end -= 1;
+  }
+  return true;
 }
 
 /**
@@ -346,15 +355,6 @@ getIndexOf('qwerty', 'q');
  */
 function isContainNumber(/* num, digit */) {
   throw new Error('Not implemented');
-  // let numb = num;
-  // while (numb > 0) {
-  //   const lastDigit = numb % 10;
-  //   if (lastDigit === digit) {
-  //     return true;
-  //   }
-  //   numb = Math.floor(num / 10);
-  // }
-  // return false;
 }
 // isContainNumber(123450, 5);
 
